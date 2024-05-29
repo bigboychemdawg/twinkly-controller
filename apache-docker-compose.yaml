@@ -1,0 +1,10 @@
+version: '3'
+services:
+  web:
+    build: 
+      context: .
+      dockerfile: apache-dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - ./twinkly_api.php:/var/www/html/twinkly_api.php
