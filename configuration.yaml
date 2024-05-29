@@ -1,0 +1,48 @@
+# Twinkly API
+input_boolean:
+  twinkly_power:
+    name: Twinkly Power
+
+rest_command:
+  twinkly_control:
+    url: "http://localhost:8080/twinkly_api.php?address={{ address }}&command={{ command }}"
+    method: GET
+
+input_number:
+  twinkly_brightness:
+    name: Twinkly Brightness
+    initial: 255
+    min: 0
+    max: 255
+    step: 1
+
+light:
+  - platform: template
+    lights:
+      twinkly:
+        friendly_name: "Twinkly"
+        level_template: "{{ states('input_number.twinkly_brightness') | int  }}"
+        value_template: "{{ is_state('input_boolean.twinkly_power', 'on') }}"
+        turn_on:
+          - service: input_boolean.turn_on
+            entity_id: input_boolean.twinkly_power
+          - service: rest_command.twinkly_control
+            data:
+              address: '192.168.88.241' // CHANGE IP!
+              command: 1
+        turn_off:
+          - service: input_boolean.turn_off
+            entity_id: input_boolean.twinkly_power
+          - service: rest_command.twinkly_control
+            data:
+              address: '192.168.88.241' // CHANGE IP!
+              command: 0
+        set_level:
+          - service: input_number.set_value
+            data_template:
+              entity_id: input_number.twinkly_brightness
+              value: "{{ brightness }}"
+          - service: rest_command.twinkly_control
+            data_template:
+              address: '192.168.88.241' // CHANGE IP!
+              command: "{{ brightness / 255 * 100 | int }}"
