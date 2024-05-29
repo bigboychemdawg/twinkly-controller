@@ -28,14 +28,14 @@ light:
             entity_id: input_boolean.twinkly_power
           - service: rest_command.twinkly_control
             data:
-              address: '192.168.88.241' // CHANGE IP!
+              address: '192.168.88.241' # CHANGE IP!
               command: 1
         turn_off:
           - service: input_boolean.turn_off
             entity_id: input_boolean.twinkly_power
           - service: rest_command.twinkly_control
             data:
-              address: '192.168.88.241' // CHANGE IP!
+              address: '192.168.88.241' # CHANGE IP!
               command: 0
         set_level:
           - service: input_number.set_value
@@ -44,5 +44,5 @@ light:
               value: "{{ brightness }}"
           - service: rest_command.twinkly_control
             data_template:
-              address: '192.168.88.241' // CHANGE IP!
+              address: '192.168.88.241' # CHANGE IP!
               command: "{{ brightness / 255 * 100 | int }}"
