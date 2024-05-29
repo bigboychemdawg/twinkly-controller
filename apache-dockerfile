@@ -1,0 +1,5 @@
+FROM php:7.4-apache
+
+COPY ./twinkly_api.php /var/www/html/
+
+EXPOSE 80
