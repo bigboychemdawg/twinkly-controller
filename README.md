@@ -1,4 +1,4 @@
-# twinkly-controller
+# Twinkly controller for Home Assistant
 
 The reason for creating this controller is an unresolved issue that has persisted for a long time, described here: https://github.com/home-assistant/core/issues/102809. This solution will likely become obsolete after the official fix for the problem.
 The controller allows you to manage the state (on/off) and brightness of your Twinkly device. Tested on my Twinkly Strings 2.8.18
