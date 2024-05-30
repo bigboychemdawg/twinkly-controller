@@ -1,7 +1,7 @@
 # twinkly-controller
 
 The reason for creating this controller is an unresolved issue that has persisted for a long time, described here: https://github.com/home-assistant/core/issues/102809. This solution will likely become obsolete after the official fix for the problem.
-The controller allows you to manage the state (on/off) and brightness of your Twinkly device.
+The controller allows you to manage the state (on/off) and brightness of your Twinkly device. Tested on my Twinkly Strings 2.8.18
 
 What we will need:
 1. Docker + Docker Compose
@@ -13,25 +13,25 @@ Connect your Twinkly device to your network using the official app. In your rout
 
 **STEP 1**
 
-Install Docker and Docker Compose on your Home Assistant server. There are numerous guides available online on how to do this, so I won't describe the process here. I will only mention that I used Docker Compose v2, so the commands described here will be without a hyphen (if you are using an older version, the commands are executed using docker-compose).
+Install Docker and Docker Compose on your Home Assistant server. There are numerous guides available on how to do this, so I won't describe the process here. I will only mention that I used Docker Compose v2, so the commands described here will be without a hyphen (if you are using an older version, the commands are executed using docker-compose).
 
 **STEP 2**
 
 Upload the files `twinkly_api.php`, `apache-dockerfile`, and `apache-docker-compose.yml` to your Home Assistant server in a single directory. Then, execute the following command to build and run the container with the Apache web server, which Home Assistant will use to send requests to your Twinkly device:
 
-`docker-compose -f apache-docker-compose.yml up --build -d`
+`docker compose -f apache-docker-compose.yml up --build -d`
 
 **STEP 3**
 
-Next, we need to edit the configuration.yaml file in Home Assistant. In my case, Home Assistant also runs in a Docker container, so I will edit it there.
+Next, we need to edit the `configuration.yaml` file in Home Assistant. In my case, Home Assistant also running in a Docker container, so I will edit it there:
 
 `docker exec -it homeassistant sh`
 `nano configuration.yaml`
 
-At the end of your configuration.yaml file, add the contents of the configuration.yaml file from this repository. 
+At the end of your `configuration.yaml` file, add the contents of the `configuration.yaml` file from this repository. 
 
 > IMPORTANT: 
-> After inserting the content into configuration.yaml, replace all instances of the IP address with the actual IP address of your Twinkly device.
+> After inserting the content into configuration.yaml, REPLACE ALL MENTIONS of the IP address with the actual IP address of your Twinkly device.
 
 Next, you need to restart Home Assistant.
 
@@ -47,3 +47,8 @@ entities:
   - entity: light.twinkly
 title: Bedroom
 ```
+![image](https://github.com/bigboychemdawg/twinkly-controller/assets/83305197/7507ec45-f5bc-4294-8fe0-1dc8d0efdc4c)
+![image](https://github.com/bigboychemdawg/twinkly-controller/assets/83305197/2b2a4ae2-4e70-4e4b-89a2-a615a1700d02)
+
+
+
